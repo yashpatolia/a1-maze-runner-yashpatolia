@@ -34,6 +34,7 @@ public class Maze {
         BufferedReader reader = new BufferedReader(new FileReader(this.mazeFile));
         String line;
         int[] size = new int[2];
+
         while ((line = reader.readLine()) != null) {
             size[0] += 1;
             size[1] = line.length();
