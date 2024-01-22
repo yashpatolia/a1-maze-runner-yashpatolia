@@ -1,9 +1,7 @@
 package ca.mcmaster.se2aa4.mazerunner;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.util.Arrays;
 
 import org.apache.commons.cli.*;
 import org.apache.logging.log4j.LogManager;
@@ -18,7 +16,8 @@ public class Main {
 
         try {
             Configuration config = configure(args);
-            Maze.printMaze(config.mazeFile);
+            Maze maze = new Maze(config.mazeFile);
+            MazeRunner.solveMaze(maze);
         } catch(Exception e) {
             logger.error("/!\\ An error has occurred /!\\");
         }
@@ -29,7 +28,7 @@ public class Main {
 
     private static Configuration configure(String[] args) throws ParseException {
         Options options = new Options();
-        options.addOption("i", true, "maze input file");
+        options.addOption("i", true, "maze text file to read");
         CommandLineParser parser = new DefaultParser();
         CommandLine cmd = parser.parse(options, args);
         String mazeFile = cmd.getOptionValue("i");
