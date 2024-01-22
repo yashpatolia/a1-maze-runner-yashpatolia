@@ -54,6 +54,11 @@ public class Maze {
                 if (line.charAt(idx) == '#') {
                     maze[i][idx] = 1;
                 } else if (line.charAt(idx) == ' ') {
+                    if (i == 0) {
+                        this.start = new Integer[] {i, idx};
+                    } else if (i == size[0] - 1) {
+                        this.end = new Integer[] {i, idx};
+                    }
                     maze[i][idx] = 0;
                 }
             }
