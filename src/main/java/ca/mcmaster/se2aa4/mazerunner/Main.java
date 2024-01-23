@@ -1,7 +1,6 @@
 package ca.mcmaster.se2aa4.mazerunner;
 
 import java.io.File;
-import java.util.Arrays;
 
 import org.apache.commons.cli.*;
 import org.apache.logging.log4j.LogManager;
@@ -17,9 +16,12 @@ public class Main {
         try {
             Configuration config = configure(args);
             Maze maze = new Maze(config.mazeFile);
-            MazeRunner.solveMaze(maze);
+
+            String path = MazeRunner.solveMaze(maze);
+            System.out.println(path);
         } catch(Exception e) {
             logger.error("/!\\ An error has occurred /!\\");
+            logger.error(e.getMessage());
         }
         logger.info("**** Computing path");
         logger.info("PATH NOT COMPUTED");
