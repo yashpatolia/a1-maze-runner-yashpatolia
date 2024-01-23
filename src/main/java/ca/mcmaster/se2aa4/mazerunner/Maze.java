@@ -97,6 +97,7 @@ public class Maze {
         this.maze = maze;
     }
 
+    // Check if cell is empty (true if empty, false if wall)
     public boolean checkEmptyCell(Integer[] cell) throws ArrayIndexOutOfBoundsException {
         try {
             return this.maze[cell[0]][cell[1]] == 0;
@@ -113,5 +114,20 @@ public class Maze {
             case RIGHT -> new Integer[]{0, 1};
             default -> new Integer[]{0, 0};
         };
+    }
+
+    public Facing turnRight(Facing facing) {
+        return switch (facing) {
+            case UP -> Facing.RIGHT;
+            case DOWN -> Facing.LEFT;
+            case LEFT -> Facing.UP;
+            case RIGHT -> Facing.DOWN;
+            default -> facing;
+        };
+    }
+
+    public Integer[] move(Facing facing, Integer[] position) {
+        Integer[] movement = getMovement(facing);
+        return new Integer[] {position[0] + movement[0], position[1] + movement[1]};
     }
 }
