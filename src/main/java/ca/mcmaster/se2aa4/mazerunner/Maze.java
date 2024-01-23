@@ -3,7 +3,6 @@ package ca.mcmaster.se2aa4.mazerunner;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Arrays;
 
 enum Facing {
     UP,
@@ -96,5 +95,23 @@ public class Maze {
             i++;
         }
         this.maze = maze;
+    }
+
+    public boolean checkEmptyCell(Integer[] cell) throws ArrayIndexOutOfBoundsException {
+        try {
+            return this.maze[cell[0]][cell[1]] == 0;
+        } catch (ArrayIndexOutOfBoundsException e) {
+            return false;
+        }
+    }
+
+    public Integer[] getMovement(Facing facing) {
+        return switch (facing) {
+            case UP -> new Integer[]{-1, 0};
+            case DOWN -> new Integer[]{1, 0};
+            case LEFT -> new Integer[]{0, -1};
+            case RIGHT -> new Integer[]{0, 1};
+            default -> new Integer[]{0, 0};
+        };
     }
 }
