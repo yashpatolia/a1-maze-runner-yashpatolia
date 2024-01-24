@@ -10,39 +10,29 @@ public class MazeRunner {
         maze.findEntryExit();
 
         Integer[] mazePointer = maze.start;
-        int row = mazePointer[0];
-        int column = mazePointer[1];
-        Facing tempFacing = maze.facing;
 
         while (!Arrays.equals(mazePointer, maze.end)) {
-            if (maze.facing == tempFacing) {
-                Integer[] movement = maze.getMovement(maze.facing);
-                Integer[] newPosition = new Integer[] {row + movement[0], column + movement[1]};
+            Integer[] rightCell = maze.move(maze.turnRight(maze.facing), mazePointer);
+            Integer[] frontCell = maze.move(maze.facing, mazePointer);
+            Integer[] leftCell = maze.move(maze.turnLeft(maze.facing), mazePointer);
 
-                if (maze.checkEmptyCell(newPosition)) {
-                    row = newPosition[0];
-                    column = newPosition[1];
-                    mazePointer = newPosition;
-                    path += "F";
-                    tempFacing = maze.facing;
-                } else {
-                    if (maze.facing == Facing.UP) {
-                        maze.facing = Facing.RIGHT;
-                        path += "R";
-                    } else if (maze.facing == Facing.DOWN) {
-                        maze.facing = Facing.LEFT;
-                        path += "L";
-                    } else if (maze.facing == Facing.LEFT) {
-                        maze.facing = Facing.UP;
-                        path += "U";
-                    } else if (maze.facing == Facing.RIGHT) {
-                        maze.facing = Facing.DOWN;
-                        path += "D";
-                    }
-                }
+            if (maze.checkEmptyCell(rightCell)) {
+                maze.facing = maze.turnRight(maze.facing);
+                mazePointer = rightCell;
+                path += " R F";
+            } else if (maze.checkEmptyCell(frontCell)) {
+                mazePointer = frontCell;
+                path += "F";
+            } else if (maze.checkEmptyCell(leftCell)) {
+                maze.facing = maze.turnLeft(maze.facing);
+                mazePointer = leftCell;
+                path += " L F";
+            } else {
+                maze.facing = maze.turnRight(maze.facing);
+                maze.facing = maze.turnRight(maze.facing);
+                path += " RR ";
             }
         }
-
         return path;
     }
 
