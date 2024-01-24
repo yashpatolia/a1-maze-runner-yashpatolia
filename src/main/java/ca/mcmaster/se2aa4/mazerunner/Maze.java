@@ -126,6 +126,16 @@ public class Maze {
         };
     }
 
+    public Facing turnLeft(Facing facing) {
+        return switch (facing) {
+            case UP -> Facing.LEFT;
+            case DOWN -> Facing.RIGHT;
+            case LEFT -> Facing.DOWN;
+            case RIGHT -> Facing.UP;
+            default -> facing;
+        };
+    }
+
     public Integer[] move(Facing facing, Integer[] position) {
         Integer[] movement = getMovement(facing);
         return new Integer[] {position[0] + movement[0], position[1] + movement[1]};

@@ -14,25 +14,24 @@ public class MazeRunner {
         while (!Arrays.equals(mazePointer, maze.end)) {
             Integer[] rightCell = maze.move(maze.turnRight(maze.facing), mazePointer);
             Integer[] frontCell = maze.move(maze.facing, mazePointer);
-            Integer[] newPosition;
+            Integer[] leftCell = maze.move(maze.turnLeft(maze.facing), mazePointer);
 
             if (maze.checkEmptyCell(rightCell)) {
-                newPosition = rightCell;
-                path += "R";
-            }
-            else if (maze.checkEmptyCell(frontCell)) {
-                newPosition = frontCell;
+                maze.facing = maze.turnRight(maze.facing);
+                mazePointer = rightCell;
+                path += " R F";
+            } else if (maze.checkEmptyCell(frontCell)) {
+                mazePointer = frontCell;
                 path += "F";
+            } else if (maze.checkEmptyCell(leftCell)) {
+                maze.facing = maze.turnLeft(maze.facing);
+                mazePointer = leftCell;
+                path += " L F";
             } else {
-                Integer[] cell = maze.move(maze.turnRight(maze.facing), mazePointer);
-                while (!maze.checkEmptyCell(cell)) {
-                    maze.facing = maze.turnRight(maze.facing);
-                    cell = maze.move(maze.turnRight(maze.facing), mazePointer);
-                    path += "R";
-                }
-                newPosition = cell;
+                maze.facing = maze.turnRight(maze.facing);
+                maze.facing = maze.turnRight(maze.facing);
+                path += " RR ";
             }
-            mazePointer = newPosition;
         }
         return path;
     }

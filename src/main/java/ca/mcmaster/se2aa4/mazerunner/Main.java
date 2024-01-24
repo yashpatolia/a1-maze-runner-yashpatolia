@@ -17,15 +17,14 @@ public class Main {
             Configuration config = configure(args);
             Maze maze = new Maze(config.mazeFile);
 
+            logger.info("**** Computing path");
             String path = MazeRunner.solveMaze(maze);
             System.out.println(path);
+            logger.info("** End of MazeRunner");
         } catch(Exception e) {
             logger.error("/!\\ An error has occurred /!\\");
             logger.error(e.getMessage());
         }
-        logger.info("**** Computing path");
-        logger.info("PATH NOT COMPUTED");
-        logger.info("** End of MazeRunner");
     }
 
     private static Configuration configure(String[] args) throws ParseException {
