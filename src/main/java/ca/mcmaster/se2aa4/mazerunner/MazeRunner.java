@@ -36,7 +36,29 @@ public class MazeRunner {
         return path;
     }
 
-    public static void checkIfSolves(Maze maze) {
-        // TODO: implement this method
+    public static String checkIfSolves(Maze maze, String path) throws IOException {
+        maze.convertTo2DArray();
+        maze.findEntryExit();
+
+        Integer[] mazePointer = maze.start;
+
+        for (int i = 0; i < path.length(); i++) {
+            if (path.charAt(i) == 'F') {
+                mazePointer = maze.move(maze.facing, mazePointer);
+                if (!maze.checkEmptyCell(mazePointer)) {
+                    return "incorrect path";
+                }
+            } else if (path.charAt(i) == 'R') {
+                maze.facing = maze.turnRight(maze.facing);
+            } else if (path.charAt(i) == 'L') {
+                maze.facing = maze.turnLeft(maze.facing);
+            }
+        }
+
+        if (Arrays.equals(mazePointer, maze.end)) {
+            return "correct path";
+        } else {
+            return "incorrect path";
+        }
     }
 }
