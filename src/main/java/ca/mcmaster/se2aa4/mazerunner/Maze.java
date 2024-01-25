@@ -55,15 +55,10 @@ public class Maze {
         for (int i = 0; i < this.maze.length; i++) {
             for (int j = 0; j < this.maze[0].length; j++) {
                 if (this.maze[i][j] == 0) {
-                    if (i == 0) {
-                        this.start = new Integer[] {i, j};
-                        this.facing = Facing.DOWN;
-                    } else if (j == 0) {
+                    if (j == 0) {
                         this.start = new Integer[] {i, j};
                         this.facing = Facing.RIGHT;
                     } else if (j == this.maze[0].length - 1) {
-                        this.end = new Integer[]{i, j};
-                    } else if (i == this.maze.length - 1) {
                         this.end = new Integer[]{i, j};
                     }
                 }
