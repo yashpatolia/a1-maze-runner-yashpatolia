@@ -19,6 +19,7 @@ public class Main {
 
             logger.info("**** Computing path");
             String path = MazeRunner.solveMaze(maze);
+            path = maze.getFactorizedPath(path);
             System.out.println(path);
             logger.info("** End of MazeRunner");
         } catch(Exception e) {
