@@ -3,14 +3,6 @@ package ca.mcmaster.se2aa4.mazerunner;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Arrays;
-
-enum Facing {
-    UP,
-    DOWN,
-    LEFT,
-    RIGHT
-}
 
 public class Maze {
 
@@ -109,34 +101,6 @@ public class Maze {
             case LEFT -> new Integer[]{0, -1};
             case RIGHT -> new Integer[]{0, 1};
             default -> new Integer[]{0, 0};
-        };
-    }
-
-    public Facing turn(Facing facing, String direction) {
-        return switch (direction) {
-            case "R" -> turnRight(facing);
-            case "L" -> turnLeft(facing);
-            default -> facing;
-        };
-    }
-
-    private Facing turnRight(Facing facing) {
-        return switch (facing) {
-            case UP -> Facing.RIGHT;
-            case DOWN -> Facing.LEFT;
-            case LEFT -> Facing.UP;
-            case RIGHT -> Facing.DOWN;
-            default -> facing;
-        };
-    }
-
-    private Facing turnLeft(Facing facing) {
-        return switch (facing) {
-            case UP -> Facing.LEFT;
-            case DOWN -> Facing.RIGHT;
-            case LEFT -> Facing.DOWN;
-            case RIGHT -> Facing.UP;
-            default -> facing;
         };
     }
 
