@@ -17,10 +17,16 @@ public class Main {
             Configuration config = configure(args);
             Maze maze = new Maze(config.mazeFile);
 
-            logger.info("**** Computing path");
-            String path = MazeRunner.solveMaze(maze);
-            path = maze.getFactorizedPath(path);
-            System.out.println(path);
+            if (config.verifyPath != null) {
+                logger.info("**** Verifying path");
+                String pathCheck = MazeRunner.checkIfSolves(maze, config.verifyPath);
+                System.out.println(pathCheck);
+            } else {
+                logger.info("**** Computing path");
+                String path = MazeRunner.solveMaze(maze);
+                path = maze.getFactorizedPath(path);
+                System.out.println(path);
+            }
             logger.info("** End of MazeRunner");
         } catch(Exception e) {
             logger.error("/!\\ An error has occurred /!\\");
@@ -31,14 +37,16 @@ public class Main {
     private static Configuration configure(String[] args) throws ParseException {
         Options options = new Options();
         options.addOption("i", true, "maze text file to read");
+        options.addOption("p", true, "path to verify");
         CommandLineParser parser = new DefaultParser();
         CommandLine cmd = parser.parse(options, args);
         String mazeFile = cmd.getOptionValue("i");
+        String verifyPath = cmd.getOptionValue("p");
         logger.info("**** Reading the maze from file " + mazeFile);
-        return new Configuration(mazeFile);
+        return new Configuration(mazeFile, verifyPath);
     }
 
-    private record Configuration(String mazeFile) {
+    private record Configuration(String mazeFile, String verifyPath) {
         Configuration {
             if (mazeFile == null) {
                 throw new IllegalArgumentException("Maze file must be specified");
