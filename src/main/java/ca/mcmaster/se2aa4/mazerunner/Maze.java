@@ -112,7 +112,15 @@ public class Maze {
         };
     }
 
-    public Facing turnRight(Facing facing) {
+    public Facing turn(Facing facing, String direction) {
+        return switch (direction) {
+            case "R" -> turnRight(facing);
+            case "L" -> turnLeft(facing);
+            default -> facing;
+        };
+    }
+
+    private Facing turnRight(Facing facing) {
         return switch (facing) {
             case UP -> Facing.RIGHT;
             case DOWN -> Facing.LEFT;
@@ -122,7 +130,7 @@ public class Maze {
         };
     }
 
-    public Facing turnLeft(Facing facing) {
+    private Facing turnLeft(Facing facing) {
         return switch (facing) {
             case UP -> Facing.LEFT;
             case DOWN -> Facing.RIGHT;
