@@ -3,6 +3,7 @@ package ca.mcmaster.se2aa4.mazerunner;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Arrays;
 
 enum Facing {
     UP,
@@ -139,5 +140,18 @@ public class Maze {
     public Integer[] move(Facing facing, Integer[] position) {
         Integer[] movement = getMovement(facing);
         return new Integer[] {position[0] + movement[0], position[1] + movement[1]};
+    }
+
+    public String getFactorizedPath(String path) {
+        String factorizedPath = "";
+        String[] splitPath = path.split(" ");
+
+        for (int i = 0; i < splitPath.length; i++) {
+            int count = splitPath[i].length();
+            char letter = splitPath[i].charAt(0);
+            factorizedPath += String.format("%d%c ", count, letter);
+        }
+
+        return factorizedPath;
     }
 }
