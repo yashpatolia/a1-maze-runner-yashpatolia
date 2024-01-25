@@ -85,7 +85,6 @@ public class Maze {
         this.maze = maze;
     }
 
-    // Check if cell is empty (true if empty, false if wall)
     public boolean checkEmptyCell(Integer[] cell) throws ArrayIndexOutOfBoundsException {
         try {
             return this.maze[cell[0]][cell[1]] == 0;
