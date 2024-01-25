@@ -12,9 +12,9 @@ public class MazeRunner {
         Integer[] mazePointer = maze.start;
 
         while (!Arrays.equals(mazePointer, maze.end)) {
-            Integer[] rightCell = maze.move(MazeTurn.turn(maze.facing, "R"), mazePointer);
-            Integer[] frontCell = maze.move(maze.facing, mazePointer);
-            Integer[] leftCell = maze.move(MazeTurn.turn(maze.facing, "L"), mazePointer);
+            Integer[] rightCell = MazeMove.move(MazeTurn.turn(maze.facing, "R"), mazePointer);
+            Integer[] frontCell = MazeMove.move(maze.facing, mazePointer);
+            Integer[] leftCell = MazeMove.move(MazeTurn.turn(maze.facing, "L"), mazePointer);
 
             if (maze.checkEmptyCell(rightCell)) {
                 maze.facing = MazeTurn.turn(maze.facing, "R");
@@ -44,7 +44,7 @@ public class MazeRunner {
 
         for (int i = 0; i < path.length(); i++) {
             if (path.charAt(i) == 'F') {
-                mazePointer = maze.move(maze.facing, mazePointer);
+                mazePointer = MazeMove.move(maze.facing, mazePointer);
                 if (!maze.checkEmptyCell(mazePointer)) {
                     return "incorrect path";
                 }
