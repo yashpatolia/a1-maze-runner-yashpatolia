@@ -9,9 +9,10 @@ public class MazeRunner {
         maze.convertTo2DArray();
         maze.findEntryExit();
 
-        Integer[] mazePointer = maze.start;
+        Integer[] mazePointer = maze.getMazeStart();
+        Integer[] mazeEnd = maze.getMazeEnd();
 
-        while (!Arrays.equals(mazePointer, maze.end)) {
+        while (!Arrays.equals(mazePointer, mazeEnd)) {
             Integer[] rightCell = MazeMove.move(MazeTurn.turn(maze.facing, "R"), mazePointer);
             Integer[] frontCell = MazeMove.move(maze.facing, mazePointer);
             Integer[] leftCell = MazeMove.move(MazeTurn.turn(maze.facing, "L"), mazePointer);
@@ -40,7 +41,7 @@ public class MazeRunner {
         maze.convertTo2DArray();
         maze.findEntryExit();
 
-        Integer[] mazePointer = maze.start;
+        Integer[] mazePointer = maze.getMazeStart();
 
         for (int i = 0; i < path.length(); i++) {
             if (path.charAt(i) == 'F') {
@@ -55,7 +56,8 @@ public class MazeRunner {
             }
         }
 
-        if (Arrays.equals(mazePointer, maze.end)) {
+        Integer[] mazeEnd = maze.getMazeEnd();
+        if (Arrays.equals(mazePointer, mazeEnd)) {
             return "correct path";
         } else {
             return "incorrect path";

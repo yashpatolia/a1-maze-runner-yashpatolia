@@ -7,13 +7,21 @@ import java.io.IOException;
 public class Maze {
 
     private final String mazeFile;
-    public Integer[][] maze;
-    public Integer[] start;
-    public Integer[] end;
+    private Integer[][] maze;
+    private Integer[] start;
+    private Integer[] end;
     public Facing facing;
 
     public Maze(String mazeFile) {
         this.mazeFile = mazeFile;
+    }
+
+    public Integer[] getMazeStart() {
+        return this.start;
+    }
+
+    public Integer[] getMazeEnd() {
+        return this.end;
     }
 
     public void printMaze() throws IOException {
