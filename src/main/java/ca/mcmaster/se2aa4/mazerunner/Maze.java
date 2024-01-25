@@ -93,17 +93,4 @@ public class Maze {
             return false;
         }
     }
-
-    public String getFactorizedPath(String path) {
-        String factorizedPath = "";
-        String[] splitPath = path.split(" ");
-
-        for (int i = 0; i < splitPath.length; i++) {
-            int count = splitPath[i].length();
-            char letter = splitPath[i].charAt(0);
-            factorizedPath += String.format("%d%c ", count, letter);
-        }
-
-        return factorizedPath;
-    }
 }

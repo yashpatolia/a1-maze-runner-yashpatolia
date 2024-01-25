@@ -24,7 +24,7 @@ public class Main {
             } else {
                 logger.info("**** Computing path");
                 String path = MazeRunner.solveMaze(maze);
-                path = maze.getFactorizedPath(path);
+                path = MazePath.getFactorizedPath(path);
                 System.out.println(path);
             }
             logger.info("** End of MazeRunner");
